@@ -26,6 +26,10 @@ class InventoryController():
         items = self.db.viewItemsInStock()
         print(json.dumps(items, cls=json_result.DecimalEncorder))
 
+    def stock_overview(self):
+        """Gives the user an overall view of remaining stock levels for each item in stock"""
+        pass    
+
 if __name__ == '__main__':
     # The main script that invokes database functions. Use by running python 'inventory_app.py' 'action' args
     # By action, I mean keywords like: create_item, view_items, delete_item, etc.
