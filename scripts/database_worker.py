@@ -2,38 +2,28 @@ import mysql.connector
 
 class DatabaseWorker():
     def __init__(self):
-        pass
+        self.db_config = {
+            "host": "localhost",
+            "user": "root",
+            "passwd": "Ianmwendwa8435!!",
+            "database": "faida_db"
+        }
 
-    def _initDb(self):
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root", 
-            passwd= "",
-            database= ""
-        )
-        cursor = db.cursor()
-        return cursor
+    def _get_connection(self):
+        return mysql.connector.connect(**self.db_config)
 
     def viewItemsInStock(self):
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root", 
-            passwd= "",
-            database= ""
-        )
-        cursor = db.cursor(dictionary=True)
+        connection = self._get_connection()
+        cursor = connection.cursor(dictionary=True)
         query = "SELECT* FROM product_data"
         cursor.execute(query)
         items = cursor.fetchall()
+        cursor.close()
+        connection.close()
         return items
     
     def createItemEntry(self, item_name, item_category, item_bp, item_qty):
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root", 
-            passwd= "",
-            database= ""
-        )
+        connection = self._get_connection()
         cursor = connection.cursor()
         query = "INSERT INTO product_data (product_name, product_category, buying_price, product_quantity) VALUES(%s, %s, %s, %s)"
         value_data = (item_name, item_category, item_bp, item_qty)
@@ -45,12 +35,7 @@ class DatabaseWorker():
         connection.close()
 
     def deleteItem(self, item_name):
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root", 
-            passwd= "",
-            database= ""
-        )  
+        connection = self._get_connection()
         query = "DELETE FROM product_data WHERE product_name = %s"
         cursor = connection.cursor()
         cursor.execute(query, (item_name, ))
