@@ -8,7 +8,7 @@ class InputManager {
         if(stringInput.isEmpty()){
             println("Please provide an input!")
         }
-        return stringInput
+        return stringInput.trim()
     }
     fun promptDoubleInput(message: String): Double{
         print(message)

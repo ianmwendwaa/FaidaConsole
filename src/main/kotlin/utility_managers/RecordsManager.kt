@@ -14,37 +14,44 @@ class RecordsManager(private val inputManager: InputManager, private val payload
         ignoreUnknownKeys = true
     }
     fun createDailyRecord(){
-        println("Creating a new day's record...")
-        val dateToday =  LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-
-        val itemsSold = mutableListOf<SalesItem>()
-
         while (true){
-            println("Please enter information about items you sold today")
-            val itemName = inputManager.promptStringInput("Item name: ")
-            val itemQtySold = inputManager.promptIntInput("$itemName sold: ")
-            val itemSellingPrice = inputManager.promptDoubleInput("Item selling price: ")
+            println("Creating a new day's record...")
+//        val dateToday =  LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            val dateToday = inputManager.promptStringInput("Record's date: ")
+            val itemsSold = mutableListOf<SalesItem>()
 
-            itemsSold.add(SalesItem(itemName, itemQtySold, itemSellingPrice))
+            while (true){
+                println("Please enter information about items you sold today")
+                val itemName = inputManager.promptStringInput("Item name: ")
+                val itemQtySold = inputManager.promptIntInput("$itemName sold: ")
+                val itemSellingPrice = inputManager.promptDoubleInput("Item selling price: ")
 
-            val proceed = inputManager.promptStringInput("Do you want to add another item?: ")
-            if (proceed.lowercase().trim() != "y") break
+                itemsSold.add(SalesItem(itemName, itemQtySold, itemSellingPrice))
+
+                val proceed = inputManager.promptStringInput("Do you want to add another item?: ")
+                if (proceed.lowercase().trim() != "y") break
+            }
+            // Collect other low-key preliminary fields
+            val timeIn = inputManager.promptStringInput("Time clocked in: ")
+            val timeOut = inputManager.promptStringInput("Time clocked out: ")
+            val maleCustomers = inputManager.promptIntInput("Male customers: ")
+            val femaleCustomers = inputManager.promptIntInput("Female customers: ")
+            val merchantComments = inputManager.promptStringInput("Comments: ")
+
+            // Assemble the data, encoding the item data sold to a JSON
+            val itemDataJSONPayload = json.encodeToString(itemsSold)
+
+            val recordData = RecordData(dateToday, timeIn, timeOut, maleCustomers,
+                femaleCustomers, merchantComments)
+            payloadDump.sendRecordsCreationRequestPayload(
+                recordData, itemDataJSONPayload
+            )
+            val wanna_continue = inputManager.promptStringInput("Do you wish to continue adding records: ")
+            if (wanna_continue.trim().lowercase() != "y") break
         }
-        // Collect other low-key preliminary fields
-        val timeIn = inputManager.promptStringInput("Time clocked in: ")
-        val timeOut = inputManager.promptStringInput("Time clocked out: ")
-        val maleCustomers = inputManager.promptIntInput("Male customers: ")
-        val femaleCustomers = inputManager.promptIntInput("Female customers: ")
-        val merchantComments = inputManager.promptStringInput("Comments: ")
-
-        // Assemble the data, encoding the item data sold to a JSON
-        val itemDataJSONPayload = json.encodeToString(itemsSold)
-
-        val recordData = RecordData(dateToday, timeIn, timeOut, maleCustomers,
-            femaleCustomers, merchantComments)
-        val recordCreationResult = payloadDump.sendRecordsCreationRequestPayload(
-            recordData, itemDataJSONPayload
-        )
-        print(recordCreationResult)
+    }
+    fun viewDailyPerformance(){
+        val requestResult = payloadDump.requestDailyPerformanceGraph()
+        print(requestResult)
     }
 }

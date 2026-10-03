@@ -2,6 +2,8 @@ from scripts import database_worker as db
 from datetime import datetime
 import json
 import sys
+import numpy as np
+import matplotlib.pyplot as plt
 
 class DailyRecordsController:
     def __init__(self):
@@ -53,6 +55,35 @@ class DailyRecordsController:
     def delete_record(self):
         pass
 
+    def show_daily_performance_analysis(self):
+        # Plot the graph based on total revenue per recorded day
+        conn = db.DatabaseWorker()._get_connection()
+        cursor = conn.cursor()
+        query = "SELECT record_date, total_revenue FROM daily_records"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+
+        if not rows:
+            print("No rows were found!")
+
+        # At this point, I have both dates and their respective revenues. Use a 2D matrix and sieve the data
+        matrix = np.array(rows, dtype=object)
+
+        dates = matrix[:, 0].astype(str)
+        revenues = matrix[:, 1].astype(float)  
+
+        plt.plot(dates, revenues, marker='o', color='green')
+        plt.title("Daily performance June 2026")
+        plt.xlabel("Record dates")
+        plt.xticks(rotation=45)
+        plt.ylabel("Revenue")
+        plt.grid(visible=True)
+        plt.show()
+
+        
+
+
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("Insufficient arguments")
@@ -63,3 +94,7 @@ if __name__ == '__main__':
     recordmanager = DailyRecordsController()
     if action == "make_record_entry":
         recordmanager.create_daily_record(data_args)
+    elif action == "show_daily_performance_graph":
+        recordmanager.show_daily_performance_analysis()
+    # dr = DailyRecordsController()
+    # dr.show_daily_performance_analysis()

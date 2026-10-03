@@ -1,12 +1,6 @@
 package com.example.faidalib.helpers
 
-import com.example.faidalib.models.SalesItem
-import com.example.faidalib.models.RecordData
 import com.example.faidalib.utility_managers.RecordsManager
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class MenuManager(private val inputManager: InputManager,
                   private val inventoryManager: com.example.faidalib.utility_managers.InventoryManager,
@@ -37,14 +31,10 @@ class MenuManager(private val inputManager: InputManager,
             "2" -> inventoryManager.viewItemsInStock()
             "3" -> inventoryManager.deleteItem()
             "4" -> inventoryManager.stockOverView()
-            "5" -> _invoke_daily_performance()
+            "5" -> recordManager.viewDailyPerformance()
             "6" -> recordManager.createDailyRecord()
             "7" -> _invoke_delete_record()
         }
-    }
-
-    private fun _invoke_daily_performance(){
-        println("Invoking Faida's graph engine to show daily performance")
     }
 
     private fun _invoke_delete_record(){

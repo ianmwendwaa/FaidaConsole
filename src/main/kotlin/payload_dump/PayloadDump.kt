@@ -31,4 +31,8 @@ class PayloadDump(private val bridge: PythonBridge) {
         ))
     }
 
+    fun requestDailyPerformanceGraph(): String{
+        return bridge.runPyScript(recordsScript, "show_daily_performance_graph", emptyList())
+    }
+
 }
