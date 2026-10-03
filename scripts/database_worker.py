@@ -5,8 +5,8 @@ class DatabaseWorker():
         self.db_config = {
             "host": "localhost",
             "user": "root",
-            "passwd": "#",
-            "database": ""
+            "passwd": "Ianmwendwa8435!!",
+            "database": "faida_db"
         }
 
     def _get_connection(self):

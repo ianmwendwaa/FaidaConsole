@@ -1,30 +1,17 @@
 package com.example.faidalib
 
-import com.example.faidalib.items_management.InventoryManager
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+import com.example.faidalib.backend.PayloadDump
+import com.example.faidalib.bridge.PythonProtoBridge
+import com.example.faidalib.helpers.InputManager
+import com.example.faidalib.helpers.MenuManager
+import com.example.faidalib.utility_managers.InventoryManager
+import com.example.faidalib.utility_managers.RecordsManager
 
 fun main() {
-//    val faidaRunning = true
-//    while (faidaRunning){
-//        val userChoice = readln()
-//
-//        if (userChoice.length > 1 || userChoice.isEmpty()){
-//            println("Please enter a valid choice!")
-//        }
-//        when(userChoice){
-//            "1" -> menuActions.createNewItem()
-//            "2" -> menuActions.viewItems()
-//            "3" -> menuActions.deleteItem()
-//            "4" -> menuActions.stockOverView()
-//            "5" -> menuActions.viewDailyPerformance()
-//            "6" -> menuActions.createDailyRecord()
-//            "7" -> !faidaRunning
-//        }
-//    }
     val bridge = PythonProtoBridge()
-    val inventoryManager = InventoryManager(bridge)
-    val menuManager = MenuManager(inventoryManager)
-
+    val payloadDump = PayloadDump(bridge)
+    val recordsManager = RecordsManager(InputManager(), payloadDump)
+    val inventoryManager = InventoryManager(InputManager(), payloadDump)
+    val menuManager = MenuManager(inputManager = InputManager(), inventoryManager, recordsManager)
     menuManager.startFaidaEngine()
 }

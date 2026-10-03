@@ -1,4 +1,4 @@
-package com.example.faidalib
+package com.example.faidalib.models
 
 import kotlinx.serialization.Serializable
 

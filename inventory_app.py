@@ -43,4 +43,6 @@ if __name__ == '__main__':
     if action == 'create_item':
         controller.create_item(data_args)
     elif action == 'view_items':
-        controller.view_items()    
+        controller.view_items()   
+    elif action == 'delete_item':
+        controller.delete_item(data_args) 
