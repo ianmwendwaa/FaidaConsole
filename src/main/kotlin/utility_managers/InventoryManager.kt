@@ -1,6 +1,8 @@
 package com.example.faidalib.utility_managers
 
-import com.example.faidalib.backend.PayloadDump
+import com.example.faidalib.helpers.InlineHelper
+import com.example.faidalib.helpers.InlineInventoryHelper
+import com.example.faidalib.payload_dump.PayloadDump
 import com.example.faidalib.helpers.InputManager
 import com.example.faidalib.models.ItemDataOutput
 import com.example.faidalib.models.NewItemData
@@ -14,11 +16,27 @@ class InventoryManager(private val inputManager: InputManager, private val paylo
     fun createItem(){
         println("Initializing database engine...")
         println("Ready! Provide item details when ready.")
+
         val itemName = inputManager.promptStringInput("Item name: ")
+        val itemCategory = inputManager.promptStringInput("Item category: ")
         val itemBP = inputManager.promptDoubleInput("Item buying price: ")
         val itemQty = inputManager.promptIntInput("Item quantity: ")
+        val dateToday = inputManager.dateToday()
 
-        val data = NewItemData(itemName, itemBP, itemQty)
+        // Generate this item's creation signature. Refer to function generateItemUniqueSignature()
+
+
+        //Empty list to store the signature
+        val itemIdSignature = mutableListOf<String>()
+
+        // Get the first two characters in the item's name
+        val ftChars = itemName.substring(0, 2)
+
+        // Validate the date provided
+        val parsedDate = InlineInventoryHelper.validateDate(dateToday) ?: return
+
+
+        val data = NewItemData(itemName, itemCategory, itemBP, itemQty, dateToday)
         val creationResult = payloadDump.sendItemCreationRequestPayload(data)
         print(creationResult)
     }
@@ -31,6 +49,7 @@ class InventoryManager(private val inputManager: InputManager, private val paylo
 
         val deletionResult = payloadDump.sendItemDeletionRequest(redItem)
         print(deletionResult)
+        viewItemsInStock()
     }
 
     fun viewItemsInStock(){
@@ -41,17 +60,19 @@ class InventoryManager(private val inputManager: InputManager, private val paylo
 
         try {
             val itemsListRetrieved: List<ItemDataOutput> = json.decodeFromString(rawRowsOutput)
-            println("-".repeat(55))
-            println(String.format("%-5s | %-12s | %-10s | %-10s | %-8s", "ID", "NAME", "CATEGORY", "BUYING_PRICE", "QTY"))
-            println("-".repeat(55))
+            println("-".repeat(74))
+            println(String.format("%-5s | %-12s | %-10s | %-10s | %-8s | %-10s", "ID", "NAME", "CATEGORY", "BUYING_PRICE", "QTY", "ARRIVAL_DATE"))
+            println("-".repeat(74))
 
+            // Append the items into a tabular view
             for (item in itemsListRetrieved){
-                println(String.format("%-5d | %-12s | %-10s | %-10.2f | %-8d",
+                println(String.format("%-5d | %-12s | %-10s | %-12.2f | %-8d | %-12s" ,
                     item.product_id,
                     item.product_name.trim(),
                     item.product_category.trim(),
                     item.buying_price,
-                    item.product_quantity
+                    item.product_quantity,
+                    item.arrival_date
                 ))
             }
         }catch (e: Exception){
@@ -63,5 +84,4 @@ class InventoryManager(private val inputManager: InputManager, private val paylo
     fun stockOverView(){
         println("Providing stock overview...")
     }
-
 }

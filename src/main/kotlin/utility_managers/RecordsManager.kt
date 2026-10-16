@@ -1,27 +1,34 @@
 package com.example.faidalib.utility_managers
 
-import com.example.faidalib.backend.PayloadDump
+import com.example.faidalib.payload_dump.PayloadDump
 import com.example.faidalib.helpers.InputManager
 import com.example.faidalib.models.SalesItem
 import com.example.faidalib.models.RecordData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class RecordsManager(private val inputManager: InputManager, private val payloadDump: PayloadDump) {
     private val json = Json{
         ignoreUnknownKeys = true
     }
+
+    /* Creation of a weekly record */
+    fun startWeekRecord(){
+        // Starts a new week (typically 7 days of the week) and dynamically adds records as new records are created
+        // If no active week is active, prompt the creation of a week
+
+    }
     fun createDailyRecord(){
         while (true){
             println("Creating a new day's record...")
-//        val dateToday =  LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+//        val dateToday = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
             val dateToday = inputManager.promptStringInput("Record's date: ")
             val itemsSold = mutableListOf<SalesItem>()
 
             while (true){
                 println("Please enter information about items you sold today")
+                // What if, instead of prompting blindly for the item name, the program displays a list of items that are
+                // in the database, based off the generated id signature?
                 val itemName = inputManager.promptStringInput("Item name: ")
                 val itemQtySold = inputManager.promptIntInput("$itemName sold: ")
                 val itemSellingPrice = inputManager.promptDoubleInput("Item selling price: ")

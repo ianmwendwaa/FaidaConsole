@@ -1,7 +1,6 @@
 from scripts import database_worker as db
 from datetime import datetime
 import json
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -31,7 +30,6 @@ class DailyRecordsController:
         conn = db.DatabaseWorker()._get_connection()
         cursor = conn.cursor()
 
-        # Parent table
         query = "INSERT INTO daily_records (record_date, time_clocked_in, time_clocked_out, male_customers, female_customers, total_revenue, merchant_comments)" \
         "VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
@@ -80,21 +78,39 @@ class DailyRecordsController:
         plt.grid(visible=True)
         plt.show()
 
-        
+    def analyseCustomers(self):
+        conn = db.DatabaseWorker()._get_connection()
+        cursor = conn.cursor()
+        query = "SELECT record_date, male_customers, female_customers FROM daily_records"
+        cursor.execute(query)
 
+        rows = cursor.fetchall()
 
+        matrix = np.array(rows, dtype=object)
+        record_dates = matrix[:, 0].astype(str)
+        male_customers = matrix[:, 1].astype(int)
+        female_customers = matrix[:, 2].astype(int)
 
+        plt.plot(record_dates, male_customers, color='b', label="Male")
+        plt.plot(record_dates, female_customers, color='red', label="Female")
+        plt.ylabel("Customers")
+        plt.xlabel("Record dates")
+        plt.xticks(rotation=45)
+        plt.grid(visible=True)
+        plt.legend()
+        plt.show()
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Insufficient arguments")
+    # if len(sys.argv) < 2:
+    #     print("Insufficient arguments")
 
-    action = sys.argv[1]
-    data_args = sys.argv[2:]    
+    # action = sys.argv[1]
+    # data_args = sys.argv[2:]    
 
-    recordmanager = DailyRecordsController()
-    if action == "make_record_entry":
-        recordmanager.create_daily_record(data_args)
-    elif action == "show_daily_performance_graph":
-        recordmanager.show_daily_performance_analysis()
-    # dr = DailyRecordsController()
+    # recordmanager = DailyRecordsController()
+    # if action == "make_record_entry":
+    #     recordmanager.create_daily_record(data_args)
+    # elif action == "show_daily_performance_graph":
+    #     recordmanager.show_daily_performance_analysis()
+    dr = DailyRecordsController()
+    dr.analyseCustomers()
     # dr.show_daily_performance_analysis()

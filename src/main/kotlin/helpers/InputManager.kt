@@ -1,5 +1,8 @@
 package com.example.faidalib.helpers
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 class InputManager {
     fun promptStringInput(message: String): String{
         print(message)
@@ -27,5 +30,8 @@ class InputManager {
             println("Please provide an input!")
         }
         return intInput.toInt()
+    }
+    fun dateToday(): String{
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     }
 }

@@ -1,4 +1,4 @@
-package com.example.faidalib.backend
+package com.example.faidalib.payload_dump
 
 import com.example.faidalib.bridge.PythonBridge
 import com.example.faidalib.models.NewItemData
@@ -10,9 +10,8 @@ class PayloadDump(private val bridge: PythonBridge) {
 
     /* Item payload dumps*/
     fun sendItemCreationRequestPayload(newItemData: NewItemData): String{
-        print(newItemData)
         return bridge.runPyScript(inventoryScript, "create_item", listOf(
-            newItemData.itemName, newItemData.itemBP.toString(), newItemData.itemTotalQty.toString()
+            newItemData.itemName, newItemData.itemCategory, newItemData.itemBP.toString(), newItemData.itemTotalQty.toString(), newItemData.itemArrivalDate
         ))
     }
     fun sendItemDeletionRequest(itemName: String): String{

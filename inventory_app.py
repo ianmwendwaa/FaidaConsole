@@ -8,26 +8,34 @@ class InventoryController():
         self.db = database_worker.DatabaseWorker()
 
     def create_item(self, args):
-        # python name.py create_item item_name item_category item_bp item_qty
-        if len(args) != 4: 
+        # python name.py create_item item_name item_category item_bp item_qty arrival_date
+        if len(args) != 5: 
             print(f"Expected 5 arguments but got {len(args)}!")
+            return
 
         print(f"Creating item: {args[0]}")    
 
-        item_name, item_category, item_bp, item_qty = args
-        self.db.createItemEntry(item_name, item_category, item_bp, item_qty)
-        return f"Item {item_name} was created successfully!"
+        item_name, item_category, item_bp, item_qty, arrival_date = args
+        self.db.createItemEntry(item_name, item_category, item_bp, item_qty, arrival_date)
+        return f"Item ({item_name}) was created successfully!"
 
     def delete_item(self, args):
-        # 
-        pass
+        # python this.py item_name
+        if len(args) != 1:
+            print(f"Expected 1 argument but got {len(args)}")
+            return
+
+        item_name = args
+        self.db.deleteItem(item_name)
+        return f"Item {item_name} successfully deleted!"
 
     def view_items(self):
         items = self.db.viewItemsInStock()
         print(json.dumps(items, cls=json_result.DecimalEncorder))
 
-    def stock_overview(self):
+    def stock_overview(self, args):
         """Gives the user an overall view of remaining stock levels for each item in stock"""
+        # Search for 
         pass    
 
 if __name__ == '__main__':

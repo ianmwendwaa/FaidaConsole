@@ -1,6 +1,6 @@
 package com.example.faidalib
 
-import com.example.faidalib.backend.PayloadDump
+import com.example.faidalib.payload_dump.PayloadDump
 import com.example.faidalib.bridge.PythonProtoBridge
 import com.example.faidalib.helpers.InputManager
 import com.example.faidalib.helpers.MenuManager
