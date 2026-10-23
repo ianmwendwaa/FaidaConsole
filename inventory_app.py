@@ -8,15 +8,15 @@ class InventoryController():
         self.db = database_worker.DatabaseWorker()
 
     def create_item(self, args):
-        # python name.py create_item item_name item_category item_bp item_qty arrival_date
-        if len(args) != 5: 
-            print(f"Expected 5 arguments but got {len(args)}!")
+        # python name.py create_item item_name item_category item_bp item_qty arrival_date signature
+        if len(args) != 6: 
+            print(f"Expected 6 arguments but got {len(args)}! Please make sure the payload src follows: <item_name, category, bp, qty, arrival date, signature>")
             return
 
         print(f"Creating item: {args[0]}")    
 
-        item_name, item_category, item_bp, item_qty, arrival_date = args
-        self.db.createItemEntry(item_name, item_category, item_bp, item_qty, arrival_date)
+        item_name = args[0]
+        self.db.createItemEntry(args)
         return f"Item ({item_name}) was created successfully!"
 
     def delete_item(self, args):

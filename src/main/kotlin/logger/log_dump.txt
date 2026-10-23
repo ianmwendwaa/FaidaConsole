@@ -1,0 +1,85 @@
+[DUMP] 16/10/2026 16:48:43 - User picked option 1: Create item
+[DUMP] 16/10/2026 16:48:44 - User attempted to created item: NewItemData(itemName=itemName, itemCategory=Fruit, itemBP=5200.0, itemTotalQty=99, itemArrivalDate=2026-10-16) with signature IT26-1016-099F-0375 which yielded result: Expected 6 arguments but got 5! Please make sure the payload src follows: <item_name, category, bp, qty, arrival date, signature>
+
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000003a046ef0@eed1f14User picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000003a046ef0@eed1f14User attempted to created item: NewItemData(itemName=Apples, itemCategory=Fruit, itemBP=5200.0, itemTotalQty=180, itemArrivalDate=2026-10-20) with signature AP26-1020-180F-6312 which yielded result: Creating item: Apples
+
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001c046ef0@eed1f14User picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001c046ef0@eed1f14User attempted to created item: NewItemData(itemName=Apple, itemCategory=Fruit, itemBP=5200.0, itemTotalQty=180, itemArrivalDate=2026-10-20) with signature AP26-1020-180F-1606 which yielded result: Creating item: Apple
+Item Apple inserted into the database!
+
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000002046ef0@eed1f14User picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000002046ef0@eed1f14User attempted to created item: NewItemData(itemName=Apples, itemCategory=Fruit, itemBP=5200.0, itemTotalQty=180, itemArrivalDate=2026-10-20) with signature AP26-1020-180F-8474 which yielded result: Creating item: Apples
+Item Apples inserted into the database!
+
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000007049ac8@3941a79cUser requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000030046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000030046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x0000000030057178@2c13da15
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000035046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000035046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x0000000035058840@71bc1ae4
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000039046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000039046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x0000000039058840@71bc1ae4
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002c046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002c046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x000000002c059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000035046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000035046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x0000000035059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002c046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002c046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x000000002c059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000f046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000f046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x000000000f059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000022046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000022046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x0000000022059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000029046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000029046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x0000000029059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001f046ef0@eed1f14User requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001f046ef0@eed1f14Encountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x000000001f059368@1055e4af
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000017049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000017049ee8@4769b07bUser requested to view items in stock.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000017049ee8@4769b07bEncountered an error while viewing items in stock. Reason: com.example.faidalib.utility_managers.InventoryManager$$Lambda/0x00000000170579b0@244038d0
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000021049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000021049ee8@4769b07bUser picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000021049ee8@4769b07bUser attempted to created item: NewItemData(itemName=Apples, itemCategory=Fruit, itemBP=5200.0, itemTotalQty=180, itemArrivalDate=2026-05-01) with signature AP26-0501-180F-1420 which yielded result: Creating item: Apples
+Item Apples inserted into the database!
+
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000030049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002b049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000003f049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000024049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000011049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000031049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000003049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002d049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000032049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000017049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000017049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000034049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001a049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000038049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000011049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001d049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000014049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000d049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000039049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000038049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000f049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000e049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000027049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001b049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000003049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000032049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002c049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000038049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001e04c040@ba4d54Starting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000a049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000031049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000023049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000022049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000030049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000016049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000016049ee8@4769b07bUser picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000016049ee8@4769b07bUser attempted to created item: NewItemData(itemName=Oranges, itemCategory=Fruit, itemBP=3200.0, itemTotalQty=195, itemArrivalDate=2026-05-01) with signature OR26-0501-195F-6301 which yielded result: Creating item: Oranges
+Item Oranges inserted into the database!
+
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000020049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000008049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000d049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.

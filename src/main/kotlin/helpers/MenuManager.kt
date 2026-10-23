@@ -1,5 +1,6 @@
 package com.example.faidalib.helpers
 
+import com.example.faidalib.logger.dumpOutputLog
 import com.example.faidalib.utility_managers.RecordsManager
 
 class MenuManager(private val inputManager: InputManager,
@@ -24,6 +25,7 @@ class MenuManager(private val inputManager: InputManager,
         println("\t Welcome to Faida+".trim())
         println("-".repeat(55))
         println(populateMenu().joinToString("\n"))
+        dumpOutputLog(listOf("Starting Faida+ Engine...", "Done! Waiting for user action."))
         val menuChoice = inputManager.promptStringInput("Select an action: ")
 
         when(menuChoice){

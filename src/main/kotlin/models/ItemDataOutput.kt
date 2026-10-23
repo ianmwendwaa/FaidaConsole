@@ -9,5 +9,6 @@ data class ItemDataOutput(
     val product_category: String,
     val buying_price: Double,
     val product_quantity: Int,
-    val arrival_date: String
+    val arrival_date: String,
+    val generated_item_signature: String?
 )
