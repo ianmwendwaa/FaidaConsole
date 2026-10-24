@@ -43,3 +43,12 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### .env file ###
+.env
+
+### Python virtual environment ###
+.venv
+
+### IntelliJ config ###
+.idea

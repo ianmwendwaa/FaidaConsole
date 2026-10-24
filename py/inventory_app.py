@@ -1,11 +1,11 @@
-from scripts import database_worker
+from scripts.item_crud import ItemCRUDMediator
 from scripts import json_result
 import sys
 import json
 
 class InventoryController():
     def __init__(self):
-        self.db = database_worker.DatabaseWorker()
+        self.item_crud_manager = ItemCRUDMediator()
 
     def create_item(self, args):
         # python name.py create_item item_name item_category item_bp item_qty arrival_date signature
@@ -16,7 +16,7 @@ class InventoryController():
         print(f"Creating item: {args[0]}")    
 
         item_name = args[0]
-        self.db.createItemEntry(args)
+        self.item_crud_manager.createItemEntry(args)
         return f"Item ({item_name}) was created successfully!"
 
     def delete_item(self, args):
@@ -26,11 +26,11 @@ class InventoryController():
             return
 
         item_name = args
-        self.db.deleteItem(item_name)
+        self.item_crud_manager.deleteItem(item_name)
         return f"Item {item_name} successfully deleted!"
 
     def view_items(self):
-        items = self.db.viewItemsInStock()
+        items = self.item_crud_manager.viewItemsInStock()
         print(json.dumps(items, cls=json_result.DecimalEncorder))
 
     def stock_overview(self, args):

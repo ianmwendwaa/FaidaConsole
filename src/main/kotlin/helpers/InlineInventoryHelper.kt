@@ -29,7 +29,8 @@ object InlineInventoryHelper {
         return parsedDate
     }
     fun generateUniqueItemSignature(itemCreating: NewItemData): String{
-        /* I am thinking of creating a unique id for each item since I can't think of a simpler approach. I would use a
+        /*
+        I am thinking of creating a unique id for each item since I can't think of a simpler approach. I would use a
         * one-to-many relationship, but I want to prototype with this first.
         * In my mind, the signature matches something like: AP12-1026-180F-1234 -> Meaning:
         * AP - First two letters of the item.
@@ -39,13 +40,15 @@ object InlineInventoryHelper {
         * 180 - Quantity.
         * F - Category.
         * 1234 - Randomly generated values to cover a situation where two versions of the same
-        * varieties of items have been brought. */
+        * varieties of items have been brought.
+
+        */
 
         // Container to hold the signature
-        val uniqueSignature = mutableListOf<String>()
+        val uniqueItemSignature = mutableListOf<String>()
 
         // First two characters of the item's name
-        val ft = itemCreating.itemName.substring(0, 2).uppercase(getDefault())
+        val ftwoChars = itemCreating.itemName.substring(0, 2).uppercase(getDefault())
 
         // Obtain other params as aforementioned
         val parsedDate = this.validateDate(itemCreating.itemArrivalDate) ?:
@@ -60,17 +63,9 @@ object InlineInventoryHelper {
             trailingSignatureValues.add(rand)
         }
         // Glue everything together
-        uniqueSignature.add(ft)
-        uniqueSignature.add(parsedDate.year)
-        uniqueSignature.add("-")
-        uniqueSignature.add(parsedDate.month)
-        uniqueSignature.add(parsedDate.date)
-        uniqueSignature.add("-")
-        uniqueSignature.add(qty.toString())
-        uniqueSignature.add(categoryAbbr)
-        uniqueSignature.add("-")
-        uniqueSignature.add(trailingSignatureValues.joinToString(""))
-
-        return uniqueSignature.joinToString("")
+        uniqueItemSignature.add(
+            "$ftwoChars${parsedDate.year}-${parsedDate.month}${parsedDate.date}-${qty}${categoryAbbr}-${trailingSignatureValues.joinToString("")}"
+        )
+        return uniqueItemSignature.joinToString("")
     }
 }

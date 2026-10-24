@@ -3,6 +3,8 @@ package com.example.faidalib.payload_dump
 import com.example.faidalib.bridge.PythonBridge
 import com.example.faidalib.models.NewItemData
 import com.example.faidalib.models.RecordData
+
+/** Reading this file makes me feel like I am looking at a river; data's flowing from this console to MySQL's API**/
 class PayloadDump(private val bridge: PythonBridge) {
     private val inventoryScript = "inventory_app"
     private val recordsScript = "daily_records_app"

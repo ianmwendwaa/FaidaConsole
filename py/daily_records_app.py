@@ -1,5 +1,6 @@
-from scripts import database_worker as db
-import mysql.connector as cnt
+from scripts.database_worker import DatabaseWorker
+import mysql.connector as cnt 
+from mysql.connector.types import List
 from mysql.connector.cursor import MySQLCursor
 from datetime import datetime
 from sqlalchemy import MetaData, Table, Column, String, Integer, DECIMAL, DateTime, Time, select, insert
@@ -60,8 +61,16 @@ class DailyRecordsController:
             print(f"Stock is running low! Remaining: {remaining_qty} for item {deserialized_item_data['itemSignature']}")
         cursor.execute(update_item_overview, (deserialized_item_data['itemSignature'], total_item_qty, remaining_qty, 0, deserialized_item_data['qtySold']))
 
+    def get_item_overview(self, item_sig: str)-> List:
+        get_overview_query = "SELECT* FROM item_overview WHERE items_signature = %s"
+        conn = self._get_local_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute(get_overview_query, (item_sig, ))
+        item_overview_data = cursor.fetchall()
+        return item_overview_data
     
-    def create_daily_record(self, args):
+    def create_daily_record(self, args)-> None:
         # conn = database_worker.DatabaseWorker()._get_connection()        
         if len(args) < 7:
             print(f"Expected 7 arguments but got {len(args)}") 
@@ -118,7 +127,7 @@ class DailyRecordsController:
 
     def show_daily_performance_analysis(self):
         # Plot the graph based on total revenue per recorded day
-        engine = db.DatabaseWorker()._get_connection()
+        engine = DatabaseWorker()._get_connection()
         get_daily_performance_query = select(self.daily_records_table.c.record_date, self.daily_records_table.c.total_revenue)
         with engine.connect() as connection:
             rows = connection.execute(get_daily_performance_query).fetchall()
@@ -141,7 +150,7 @@ class DailyRecordsController:
         plt.show()
 
     def analyseCustomers(self):
-        conn = db.DatabaseWorker()._get_connection()
+        conn = DatabaseWorker()._get_connection()
         cursor = conn.cursor()
         query = "SELECT record_date, male_customers, female_customers FROM daily_records"
         cursor.execute(query)
@@ -162,17 +171,18 @@ class DailyRecordsController:
         plt.legend()
         plt.show()
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Insufficient arguments")
+    # if len(sys.argv) < 2:
+    #     print("Insufficient arguments")
 
-    action = sys.argv[1]
-    data_args = sys.argv[2:]    
+    # action = sys.argv[1]
+    # data_args = sys.argv[2:]    
 
-    recordmanager = DailyRecordsController()
-    if action == "make_record_entry":
-        recordmanager.create_daily_record(data_args)
-    elif action == "show_daily_performance_graph":
-        recordmanager.show_daily_performance_analysis()
-    # dr = DailyRecordsController()
+    # recordmanager = DailyRecordsController()
+    # if action == "make_record_entry":
+    #     recordmanager.create_daily_record(data_args)
+    # elif action == "show_daily_performance_graph":
+    #     recordmanager.show_daily_performance_analysis()
+    dr = DailyRecordsController()
     # dr.show_daily_performance_analysis()
     # dr.show_daily_performance_analysis()
+    print(dr.get_item_overview("AP26-0501-180F-1420"))

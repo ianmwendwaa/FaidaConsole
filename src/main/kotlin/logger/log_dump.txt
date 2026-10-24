@@ -83,3 +83,14 @@ Item Oranges inserted into the database!
 com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000020049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
 com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000008049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
 com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000000d049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000027049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000027049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000032049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000011049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000039049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000039049ee8@4769b07bUser picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000039049ee8@4769b07bUser attempted to created item: NewItemData(itemName=Passion, itemCategory=Fruit, itemBP=1200.0, itemTotalQty=100, itemArrivalDate=2026-05-01) with signature PA26-0501-100F-3671 which yielded result: 
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001e049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001e049ee8@4769b07bUser picked option 1: Create item
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001e049ee8@4769b07bUser attempted to created item: NewItemData(itemName=Passion, itemCategory=Fruit, itemBP=1800.0, itemTotalQty=100, itemArrivalDate=2026-05-01) with signature PA26-0501-100F-7645 which yielded result: Creating item: Passion
+
