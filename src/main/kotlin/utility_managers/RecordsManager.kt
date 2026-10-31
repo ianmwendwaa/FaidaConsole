@@ -12,20 +12,14 @@ class RecordsManager(private val inputManager: InputManager, private val payload
         ignoreUnknownKeys = true
     }
 
-    /* Creation of a weekly record */
-    fun startWeekRecord(){
-        // Starts a new week (typically 7 days of the week) and dynamically adds records as new records are created
-        // If no active week is active, prompt the creation of a week
-
-    }
     fun createDailyRecord(){
         val itemsSold = mutableListOf<SalesItem>()
 
-        val salesItem = SalesItem("Apples", 12, 40.00, "AP26-0501-180F-1420")
+        val salesItem = SalesItem("Apples", 23, 40.00, "AP26-0501-180F-1420", 5)
         itemsSold.add(salesItem)
 
         val recordData = RecordData(
-            "09/05/2026",
+            "10/05/2026",
             "12:38",
             "20:51",
             5,
@@ -42,7 +36,7 @@ class RecordsManager(private val inputManager: InputManager, private val payload
 //            while (true){
 //                println("Please enter information about items you sold today. Here's a list of items: ")
 ////                inventoryManager.viewItemsInStock()
-//                // What if, instead of prompting blindly for the item name, the program displays a list of items that are
+//                // What if, instead of blindly prompting for the item name, the program displays a list of items that are
 //                // in the database, based off the generated id signature?
 //                val itemName = inputManager.promptStringInput("Item name: ")
 //                val itemQtySold = inputManager.promptIntInput("$itemName(s) sold: ")

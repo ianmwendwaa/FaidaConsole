@@ -47,14 +47,14 @@ class DailyRecordsController:
          # Child table. Obtain the autoincremented id value of this day
         new_records_id = cursor.lastrowid
         
-        child_query = "INSERT INTO sales_item_record (record_id, item_name, product_signature, qty_sold, selling_price, rejects, qty_remaining)" \
-                "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        child_query = "INSERT INTO sales_item_record (record_id, item_name, product_signature, qty_sold, selling_price, rejects)" \
+                "VALUES (%s, %s, %s, %s, %s, %s)"
         
         for item in serialized_item_data:
             cursor.execute(child_query, (new_records_id, item['name'], item['itemSignature'], item['qtySold'], item['sellingPrice'], 0))
         
         # Calculate how much stock is left for this item. Get the total quantity where sig = item_sig
-        total_item_qty, net_gain = 0
+        total_item_qty, net_gain = 0, 0
         get_qty_query = "SELECT product_quantity FROM product_data WHERE generated_item_signature = %s"
 
         # Use the item signature from the parent table to get the original qty        
@@ -62,13 +62,15 @@ class DailyRecordsController:
         total_item_qty = cursor.fetchone()[0]
         remaining_qty = total_item_qty - deserialized_item_data['qtySold']
 
-        update_item_overview = "INSERT INTO item_overview (items_signature, original_qty, remaining_qty, net_gain)" \
-        "VALUES(%s, %s, %s, %s)" \
-        "ON DUPLICATE KEY UPDATE remaining_qty = remaining_qty - %s"
+        # The remaining quantity is calculated by summing the quantity sold and the rejects, and finding the difference from
+        # the original quantity ()
+        update_item_overview = "INSERT INTO item_overview (items_signature, original_qty, remaining_qty, total_rejects, net_gain)" \
+        "VALUES(%s, %s, %s, %s, %s)" \
+        "ON DUPLICATE KEY UPDATE remaining_qty = remaining_qty - (%s+%s)"
 
         if remaining_qty < 50:
             print(f"Stock is running low! Remaining: {remaining_qty} for item {deserialized_item_data['itemSignature']}")
-        cursor.execute(update_item_overview, (deserialized_item_data['itemSignature'], total_item_qty, remaining_qty, 0, deserialized_item_data['qtySold']))
+        cursor.execute(update_item_overview, (deserialized_item_data['itemSignature'], total_item_qty, remaining_qty, deserialized_item_data['rejects'],0, deserialized_item_data['qtySold'], deserialized_item_data['rejects']))
 
     def get_item_overview(self, item_sig: str)-> List:
         get_overview_query = "SELECT* FROM item_overview WHERE items_signature = %s"
@@ -170,8 +172,8 @@ class DailyRecordsController:
         plt.legend()
         plt.show()
 if __name__ == '__main__':
-    # if len(sys.argv) < 2:
-    #     print("Insufficient arguments")
+    if len(sys.argv) < 2:
+        print("Insufficient arguments")
 
     action = sys.argv[1]
     data_args = sys.argv[2:]    
@@ -181,7 +183,9 @@ if __name__ == '__main__':
         recordmanager.create_daily_record(data_args)
     elif action == "show_daily_performance_graph":
         recordmanager.show_daily_performance_analysis()
+    elif action == "get_item_x_overview":
+        recordmanager.get_item_overview(data_args)
     # dr = DailyRecordsController()
-    # # dr.show_daily_performance_analysis()
-    # # dr.show_daily_performance_analysis()
+    # # # dr.show_daily_performance_analysis()
+    # # # dr.show_daily_performance_analysis()
     # print(dr.get_item_overview("AP26-0501-180F-1420"))

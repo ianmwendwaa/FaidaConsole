@@ -147,3 +147,12 @@ com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001b049ee8@4769b07bStar
 com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000005049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
 com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000015049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
 com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000020049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000003d049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002b049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000002b049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000010049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000008049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000034049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x0000000024049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001e049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
+com.example.faidalib.logger.OutputDumpKt$$Lambda/0x000000001b049ee8@4769b07bStarting Faida+ Engine...Done! Waiting for user action.
