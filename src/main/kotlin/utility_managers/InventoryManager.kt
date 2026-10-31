@@ -56,10 +56,10 @@ class InventoryManager(private val inputManager: InputManager, private val paylo
 
         try {
             val itemsListRetrieved: List<ItemDataOutput> = json.decodeFromString(rawRowsOutput)
-            println("-".repeat(74))
+            println("-".repeat(91))
             println(String.format("%-5s | %-12s | %-10s | %-10s | %-8s | %-10s | %-25s",
-                "ID", "NAME", "CATEGORY", "BUYING_PRICE", "QTY", "ARRIVAL_DATE, ITEM_SIGNATURE"))
-            println("-".repeat(74))
+                "ID", "NAME", "CATEGORY", "BUYING_PRICE", "QTY", "ARRIVAL_DATE", "ITEM_SIGNATURE"))
+            println("-".repeat(91))
 
             // Append the items into a tabular view
             for (item in itemsListRetrieved){

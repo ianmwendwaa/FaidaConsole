@@ -1,9 +1,10 @@
-# Manages and mediates all CRUD operations on items (Creation, Renaming, Updating, Deletion)
-from sqlalchemy.engine import create_engine, Engine
+# Manages and mediates all CRUD operations on items (Creation, Reading, Updating, Deletion)
+# Created on 24/10/2026
+from sqlalchemy.engine import Engine
 from sqlalchemy import insert, Table, Column, MetaData, String, DECIMAL, Integer, DateTime, delete, select
 from dotenv import load_dotenv
 
-from database_worker import DatabaseWorker
+from scripts.database_worker import DatabaseWorker
 
 load_dotenv()
 class ItemCRUDMediator():
@@ -13,6 +14,7 @@ class ItemCRUDMediator():
         self.mysql_engine: Engine = db._get_connection()
         self.product_data = Table(
             "product_data", self.metadata,
+            Column("product_id", String),
             Column("product_name", String),
             Column("product_category", String),
             Column("buying_price", DECIMAL),
@@ -25,7 +27,7 @@ class ItemCRUDMediator():
         get_items_qry = select(self.product_data)
         with self.mysql_engine.connect() as connection:
             results = connection.execute(get_items_qry)
-        return results.fetchall()
+        return [dict(row._mapping) for row in results.fetchall()]
             
     def createItemEntry(self, args):
         query = insert(self.product_data).values(args)
@@ -39,8 +41,4 @@ class ItemCRUDMediator():
         with self.mysql_engine.connect() as connection:
             connection.execute(delete_item_query)
             connection.commit()
-            print(f"{item_name} deleted!")    
-
-if __name__ == '__main__':
-    it_crud =  ItemCRUDMediator()
-    print(it_crud.viewItemsInStock())
+            print(f"Item with signature <{item_name}> deleted!")

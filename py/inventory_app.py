@@ -1,5 +1,6 @@
+# API abstraction between the Kotlin app and the Database. Invokes related methods with specific tags via cli
 from scripts.item_crud import ItemCRUDMediator
-from scripts import json_result
+from scripts.json_result import DecimalEncoder
 import sys
 import json
 
@@ -9,7 +10,7 @@ class InventoryController():
 
     def create_item(self, args):
         # python name.py create_item item_name item_category item_bp item_qty arrival_date signature
-        if len(args) != 6: 
+        if len(args) != 6:
             print(f"Expected 6 arguments but got {len(args)}! Please make sure the payload src follows: <item_name, category, bp, qty, arrival date, signature>")
             return
 
@@ -19,6 +20,10 @@ class InventoryController():
         self.item_crud_manager.createItemEntry(args)
         return f"Item ({item_name}) was created successfully!"
 
+    def view_items(self):
+        items = self.item_crud_manager.viewItemsInStock()
+        print(json.dumps(items, cls=DecimalEncoder))
+    
     def delete_item(self, args):
         # python this.py item_name
         if len(args) != 1:
@@ -29,13 +34,7 @@ class InventoryController():
         self.item_crud_manager.deleteItem(item_name)
         return f"Item {item_name} successfully deleted!"
 
-    def view_items(self):
-        items = self.item_crud_manager.viewItemsInStock()
-        print(json.dumps(items, cls=json_result.DecimalEncorder))
-
     def stock_overview(self, args):
-        """Gives the user an overall view of remaining stock levels for each item in stock"""
-        # Search for 
         pass    
 
 if __name__ == '__main__':

@@ -14,7 +14,7 @@ class MenuManager(private val inputManager: InputManager,
             "3. Delete item from inventory",
             "4. Stock overview",
             "5. View daily performance",
-            "6. Create a daily record",
+            "6. Create a new day's record (Sales made after the close of a day)",
             "7. Delete a record"
         )
         return menuList
@@ -28,7 +28,7 @@ class MenuManager(private val inputManager: InputManager,
         dumpOutputLog(listOf("Starting Faida+ Engine...", "Done! Waiting for user action."))
         val menuChoice = inputManager.promptStringInput("Select an action: ")
 
-        when(menuChoice){
+        when(menuChoice) {
             "1" -> inventoryManager.createItem()
             "2" -> inventoryManager.viewItemsInStock()
             "3" -> inventoryManager.deleteItem()

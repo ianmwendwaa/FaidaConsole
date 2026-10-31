@@ -21,14 +21,14 @@ class RecordsManager(private val inputManager: InputManager, private val payload
     fun createDailyRecord(){
         val itemsSold = mutableListOf<SalesItem>()
 
-        val salesItem = SalesItem("Oranges", 5, 35.00, "OR26-0501-195F-6301")
+        val salesItem = SalesItem("Apples", 12, 40.00, "AP26-0501-180F-1420")
         itemsSold.add(salesItem)
 
         val recordData = RecordData(
-            "08/05/2026",
-            "13:47",
-            "22:02",
-            1,
+            "09/05/2026",
+            "12:38",
+            "20:51",
+            5,
             2,
             "..."
         )

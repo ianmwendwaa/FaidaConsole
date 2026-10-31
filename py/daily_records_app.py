@@ -34,7 +34,7 @@ class DailyRecordsController:
     def _get_local_connection(self):
         return cnt.connect(**self.db_config)
 
-    def update_item_overview(self, cursor: MySQLCursor, deserialized_item_data):
+    def update_item_overview(self, cursor: MySQLCursor, serialized_item_data, deserialized_item_data):
         """
             UPDATE ITEM OVERVIEW 
         
@@ -44,6 +44,15 @@ class DailyRecordsController:
             However, the net gain is to be calculated only if the remaining qty is approaching 0 (3 < x < 10)
         
         """
+         # Child table. Obtain the autoincremented id value of this day
+        new_records_id = cursor.lastrowid
+        
+        child_query = "INSERT INTO sales_item_record (record_id, item_name, product_signature, qty_sold, selling_price, rejects, qty_remaining)" \
+                "VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        
+        for item in serialized_item_data:
+            cursor.execute(child_query, (new_records_id, item['name'], item['itemSignature'], item['qtySold'], item['sellingPrice'], 0))
+        
         # Calculate how much stock is left for this item. Get the total quantity where sig = item_sig
         total_item_qty, net_gain = 0
         get_qty_query = "SELECT product_quantity FROM product_data WHERE generated_item_signature = %s"
@@ -81,8 +90,7 @@ class DailyRecordsController:
         recordDate = datetime.strptime(str_date, "%d/%m/%Y")
         # Parse the json payload to a list
         sales_items_list = json.loads(items_json_payload)
-        print(sales_items_list)
-
+        
         # Calculate the day's total revenue
         total_revenue = 0
 
@@ -104,17 +112,8 @@ class DailyRecordsController:
 
         cursor.execute(query, (recordDate, time_in, time_out, male_customers, female_customers, total_revenue, comments))
   
-        # Child table. Obtain the autoincremented id value of this day
-        new_records_id = cursor.lastrowid
-
-        child_query = "INSERT INTO sales_item_record (record_id, item_name, product_signature, qty_sold, selling_price, rejects)" \
-        "VALUES (%s, %s, %s, %s, %s, %s, %s)"
-
-        for item in sales_items_list:
-            cursor.execute(child_query, (new_records_id, item['name'], item['itemSignature'], item['qtySold'], item['sellingPrice'], 0))
-
         # Update the item's overview
-        self.update_item_overview(cursor, deserialized_item_data=item)
+        self.update_item_overview(cursor, serialized_item_data=sales_items_list, deserialized_item_data=item)
         conn.commit()
         cursor.close()
         conn.close()
@@ -174,15 +173,15 @@ if __name__ == '__main__':
     # if len(sys.argv) < 2:
     #     print("Insufficient arguments")
 
-    # action = sys.argv[1]
-    # data_args = sys.argv[2:]    
+    action = sys.argv[1]
+    data_args = sys.argv[2:]    
 
-    # recordmanager = DailyRecordsController()
-    # if action == "make_record_entry":
-    #     recordmanager.create_daily_record(data_args)
-    # elif action == "show_daily_performance_graph":
-    #     recordmanager.show_daily_performance_analysis()
-    dr = DailyRecordsController()
-    # dr.show_daily_performance_analysis()
-    # dr.show_daily_performance_analysis()
-    print(dr.get_item_overview("AP26-0501-180F-1420"))
+    recordmanager = DailyRecordsController()
+    if action == "make_record_entry":
+        recordmanager.create_daily_record(data_args)
+    elif action == "show_daily_performance_graph":
+        recordmanager.show_daily_performance_analysis()
+    # dr = DailyRecordsController()
+    # # dr.show_daily_performance_analysis()
+    # # dr.show_daily_performance_analysis()
+    # print(dr.get_item_overview("AP26-0501-180F-1420"))

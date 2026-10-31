@@ -1,3 +1,5 @@
+# Created on 24/10/2026 by Mwendwa
+
 class ItemOverviewManager():
     def __init__(self):
         pass
